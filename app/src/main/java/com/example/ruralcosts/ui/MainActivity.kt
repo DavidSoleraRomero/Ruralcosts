@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.ruralcosts.R
 import com.example.ruralcosts.databinding.ActivityMainBinding
 
@@ -19,8 +21,12 @@ import com.example.ruralcosts.databinding.ActivityMainBinding
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+        val navHost = supportFragmentManager.findFragmentById(R.id.main_navigation_area) as NavHostFragment
+        val navController = navHost.navController
+
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 }
